@@ -14,6 +14,8 @@ from datetime import timedelta
 from pathlib import Path
 import environ
 
+# https://proglib.io/p/chto-takoe-top-10-owasp-i-kakie-uyazvimosti-veb-prilozheniy-naibolee-opasny-2021-09-09
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,13 +26,17 @@ env = environ.Env(
     SQLITE=(bool, True),
     CORS_ALLOW_ALL_ORIGINS=(bool, False),
     CORS_URLS_REGEX=(str, ""),
-    POSTGRES_ENGINE=(str, "django.db.backends.sqlite3"),
-    POSTGRES_DATABASE=(str, "db.sqlite3"),
-    POSTGRES_USER=(str, "django_user"),
-    POSTGRES_PASSWORD=(str, "12345"),
-    POSTGRES_HOST=(str, "127.0.0.1"),
-    POSTGRES_PORT=(str, "5432"),
-    REDIS_LOCATION=(str, "rediss://12345@127.0.0.1:3697/0"),
+    POSTGRES_ENGINE=(str, ""),
+    POSTGRES_DATABASE=(str, ""),
+    POSTGRES_USER=(str, ""),
+    POSTGRES_PASSWORD=(str, ""),
+    POSTGRES_HOST=(str, ""),
+    POSTGRES_PORT=(str, ""),
+    REDIS_CACHE=(str, ""),
+    REDIS_LOCATION=(str, ""),
+    CELERY_REDIS_URL=(str, ""),
+    EMAIL_HOST_USER=(str, ""),
+    EMAIL_HOST_PASSWORD=(str, ""),
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -42,6 +48,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
+LOGGING_TXT = False
 
 ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
 CORS_ALLOW_ALL_ORIGINS = env('CORS_ALLOW_ALL_ORIGINS')
@@ -90,7 +97,7 @@ ROOT_URLCONF = 'django_settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'react/build'],
+        'DIRS': [BASE_DIR / 'react/build', BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,9 +114,8 @@ CELERY_APP_TIMEZONE = 'Asia/Almaty'
 CELERY_APP_TASK_TRACK_STARTED = True
 CELERY_APP_TASK_TIME_LIMIT = 1800
 
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = "redis://localhost:6379"
-
+CELERY_BROKER_URL = env('CELERY_REDIS_URL')
+CELERY_RESULT_BACKEND = env('CELERY_REDIS_URL')
 
 WSGI_APPLICATION = 'django_settings.wsgi.application'
 ASGI_APPLICATION = 'django_settings.asgi.application'
@@ -140,15 +146,13 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000000
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": env("REDIS_CACHE"),
         'TIMEOUT': '120',
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
 }
-
-
 
 
 # Password validation
@@ -182,8 +186,8 @@ USE_I18N = True
 USE_TZ = True
 
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'eevee.cycle'
-EMAIL_HOST_PASSWORD = '31284bogdan'
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
