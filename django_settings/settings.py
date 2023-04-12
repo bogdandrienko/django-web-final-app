@@ -72,11 +72,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'drf_yasg',
 
     'django_api',
     'django_app',
     'django_forum',
     'django_ideas',
+    'django_vacancies',
 ]
 
 MIDDLEWARE = [
@@ -97,7 +99,7 @@ ROOT_URLCONF = 'django_settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'react/build', BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'react/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

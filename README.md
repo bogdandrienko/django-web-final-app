@@ -1,2 +1,37 @@
-# django-mvt-twitter-app
-Example of Django(MVT) web app
+# django_web_final_app[]()
+Пример Django Backend + React Frontend для развёртывания на ubuntu
+
+### Ниже будет описание функционала приложения
+
+#### Особенности:
+- **Несколько приложений**
+- **django-environ(.env)**
+- 
+- **База данных PostgreSQL**
+- **Кэширование Redis**
+- 
+- **Расширенная (onetoonefield) модель пользователя**
+- **django-grappelli + TaskAdmin(admin.ModelAdmin)**
+- 
+- **React**
+- **JWT tokens**
+- **Вся маршрутизация через regex**
+- **Есть примеры как функций-контроллеров, так и классов-контроллеров**
+- **Формат создания модели сложнее**
+- **Сериализация + Сложный ORM**
+- 
+- **Celery**
+- **Реализация нескольких тестов**
+- **Websockets**
+- 
+- **Максимум типизации проекта**
+- **Логирование в модель + .txt файл**
+- **Развёртывание на 443 порту(HTTPS) + nginx + gunicorn**
+- 
+- **Все скрипты в одном txt-файле**
+- **DRF-swagger**
+- **Гифка + видео на youtube**
+
+
+
+![Draw](about.gif)

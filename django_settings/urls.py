@@ -27,7 +27,7 @@ urlpatterns = [
 
     path('', include('django_app.urls')),
     path('api/', include('django_api.urls')),
-    # path('vacancies/', include('django_vacancies.urls')),
+    path('', include('django_vacancies.urls')),
 ]
 
 if not settings.DEBUG:
