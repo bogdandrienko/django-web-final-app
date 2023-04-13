@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.request import Request
 from rest_framework.response import Response
 from django_vacancies import models, serializers
@@ -12,7 +12,30 @@ from django_vacancies import models, serializers
 @api_view(http_method_names=["GET"])
 @permission_classes([AllowAny])
 def list(request: Request) -> Response:
-    vacancies_obj = models.Vacancy.objects.all()
+    search = request.GET["search"]
+    experience = request.GET["experience"]
+    sort = request.GET["sort"]
+
+    print(sort)
+
+    vacancies_obj = models.Vacancy.objects.filter(title__icontains=search, experience__gte=int(experience))
+    """ SELECT id, title, description WHERE title LIKE %back% """
+    # back_end
+    # endback
+    # endback_end
+
+    print(vacancies_obj)
+    if sort == "salary_asc":
+        vacancies_obj = vacancies_obj.order_by("salary")
+    elif sort == "salary_desc":
+        vacancies_obj = vacancies_obj.order_by("-salary")
+    elif sort == "by_created":
+        vacancies_obj = vacancies_obj.order_by("-created")
+    else:
+        pass
+    print(vacancies_obj)
+
+
     vacancies_json = serializers.VacancySerializer(instance=vacancies_obj, many=True).data
     # data = [
     #     {"id": 1, "title": "Продавец", "salary": 5000},

@@ -1,0 +1,50 @@
+1. Идея - сайт с вакансиям
+1.1 Посмотреть аналоги (hh / linkedin)
+1.2 ChatGpt
+1.3 Посмотреть профильные статьи
+1.4 Чтение книг
+
+2. Функционал
+2.1 Размещение вакансий
+2.2 Поиск и фильтры для вакансий
+2.3 Детальный просмотр
+2.4 Отзывы
+2.5 Рейтинг
+2.6 Резюме
+2.7 Аналитика
+
+3. Стек
+3.1 Backend / Frontend framworks
+3.2 MVT(MVC) / backend + frontend  / fullstack
+3.3 Railway = легче, но слабее нагрузки / Ps.kz = чуть сложнее, но дороже
+3.4 Дизайн и вёрстка
+
+4. Разработка
+4.1 Описание основной и вспомогательных сущностей = 
+Vacansie(title: str, salary: float, experience: int, work_type: str, company: Foreigh Key, description: str, create: datetime)
+4.2 Настроить отображение в admin-panel
+4.3 Нужно определиться с маршрутами (endpoints) - 
+
+CRUD:
+api/vacansies/list - GET
+api/vacansies/detail - GET
+api/vacansies/create - POST
+
+api/vacansies/delete - DELETE
+api/vacansies/update - PUT
+
+4.4 Написать контроллеры
+4.4.1 Пишем функцию с DRF
+4.4.2 Берём данные с базы данных через ORM
+4.4.3 Пишем сериализаторы (obj => JSON)
+
+4.4... Авторизация: 
+	2 вида маршрутов:
+	Публичные (AllowAny) - Главная, регистрация, вход... - дают доступ всегда, но пользователь не определён ! ХАОС
+	Приватные (IsAuthenticated, IsAdminUser) - api/token/ - отдаёт токен при получении логина и пароля
+4.4... Логирование
+4.4... Кэширование
+4.4... Обработка ошибок
+
+
+

@@ -11,6 +11,14 @@ export default function Page() {
     const response = await axios.post(
       "http://127.0.0.1:8000/api/vacansies/create/",
       { title: title, salary: salary }
+      // {
+      //   headers: {
+      //     // @ts-ignore
+      //     Authorization:
+      //       `JWT_Bearer ` +
+      //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxNDAzNzIzLCJpYXQiOjE2ODEzOTI5MjMsImp0aSI6Ijc1ZmU1OTE5M2EyYjQ4MWNiNDQ1ZjdjZGIxODU2YjRlIiwidXNlcl9pZCI6Mn0.AXYn5OL7pqQqEstbYC0Xe-RPmsC7S5vj8GW84d2kuck",
+      //   },
+      // }
     );
     if (response.status === 201) {
     } else {

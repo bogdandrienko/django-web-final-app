@@ -55,6 +55,14 @@ CORS_ALLOW_ALL_ORIGINS = env('CORS_ALLOW_ALL_ORIGINS')
 
 # Application definition
 
+"""
+4.4... Логирование
+4.4... Кэширование
+4.4... Обработка ошибок
+
+4) Сайт для подачи объявлений: MVT(C) (+ рейтинги и комменты)
+"""
+
 INSTALLED_APPS = [
     'daphne',
     'channels',
@@ -99,7 +107,7 @@ ROOT_URLCONF = 'django_settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'react/build'],
+        'DIRS': [BASE_DIR / 'react/build', BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -225,7 +233,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',  # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.AllowAny',  # 'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
