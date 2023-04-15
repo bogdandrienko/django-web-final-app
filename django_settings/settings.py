@@ -87,6 +87,7 @@ INSTALLED_APPS = [
     'django_forum',
     'django_ideas',
     'django_vacancies',
+    'django_salary',
 ]
 
 MIDDLEWARE = [

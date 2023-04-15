@@ -6,7 +6,8 @@ urlpatterns = [
     re_path(r"^olx/profile/login/$", views.profile_login, name="profile_login"),
     re_path(r"^olx/profile/logout/$", views.profile_logout, name="profile_logout"),
 
-    re_path(r"^olx/category/list/$", views.category_list, name="category_list"),
+    re_path(r"^olx/$", views.category_list, name="category_list"),
+
     path("olx/category/<slug:slug>/", views.category, name="category"),
     re_path(r"^olx/tovar/detail/$", views.tovar_detail, name="tovar_detail"),
 

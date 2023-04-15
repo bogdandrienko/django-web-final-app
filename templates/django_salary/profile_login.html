@@ -1,22 +1,15 @@
+{% extends 'django_salary/components/base.html' %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Регистрация пользователя</title>
-  <!-- Подключение Bootstrap 5 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-wGyJaX9jK/cp8JGMWwgsB18ZlRrc86jlKj8QJzmMxjKZh0RJkTWvPf2Tt3sAr3JLKjifSS0pTR8aJfzlJz07Og==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
+{% block title %}ВХОД{% endblock title %}
+{% block main %}
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            <h1 class="text-center">Регистрация пользователя</h1>
+            <h1 class="text-center">Вход в аккаунт</h1>
           </div>
           <div class="card-body">
             <form method="post" action="{% url 'profile_register' %}">
@@ -26,19 +19,11 @@
                 <input type="text" name="username" id="username" class="form-control">
               </div>
               <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" name="email" id="email" class="form-control">
-              </div>
-              <div class="mb-3">
-                <label for="password1" class="form-label">Пароль:</label>
-                <input type="password" name="password1" id="password1" class="form-control">
-              </div>
-              <div class="mb-3">
-                <label for="password2" class="form-label">Подтверждение пароля:</label>
-                <input type="password" name="password2" id="password2" class="form-control">
+                <label for="password" class="form-label">Пароль:</label>
+                <input type="password" name="password" id="password" class="form-control">
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-primary">Войти</button>
               </div>
             </form>
           </div>
@@ -46,8 +31,4 @@
       </div>
     </div>
   </div>
-
-  <!-- Подключение скриптов Bootstrap 5 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js" integrity="sha512-FRkV7WJgHvdeVY9XfCAYgJFYWcNSMGESv38qJN+AcQhxEN8W/fOFJhK4+9Aub4ZUBMLTjxKjJvS7+GwWeow/sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</body>
-</html>
+{% endblock main %}
