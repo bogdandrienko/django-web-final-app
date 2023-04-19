@@ -1,0 +1,54 @@
+{% extends 'app_second/components/base.html' %}
+{% load static %}
+{% block title %} {{ name }} {% endblock title %}
+{% block main %}
+
+<main class="container mt-5">
+  <h1>Список товаров</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+
+
+    <div class="col">
+      <div class="card h-100">
+        <img src="{% static tovar.image.url %}" class="card-img-top" alt="Product Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ tovar.title }}</h5>
+          <p class="card-text">{{ tovar.description }}</p>
+          <p class="card-text">{{ tovar.price }} тг.</p>
+          <a href="#" class="btn btn-primary">Добавить в корзину</a>
+            <hr>
+            {% for comment in tovar.get_comments %}
+                <div>
+                    <p>{{ comment.who_commented }}</p>
+                    {% if request.user == comment.who_commented %}
+                        <form method="POST" action="{% url 'tovar_detail' tovar.id %}">
+                        {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                        <textarea class="form-control" name="comment" id="comment" cols="30" rows="10">
+                        {{ comment.text }}
+                        </textarea>
+                        <button class="btn btn-success" type="submit">Обновить комментарий</button>
+                    </form>
+                        {% else %}
+                        <p>{{ comment.text }}</p>
+                    {% endif %}
+                    <p>{{ comment.date }}</p>
+
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <form method="POST" action="{% url 'create_comment' tovar.id %}">
+                {% csrf_token %}
+                <label for="comment">Ваш комментарий</label>
+                <textarea class="form-control" name="comment" id="comment" cols="30" rows="10"></textarea>
+                <button class="btn btn-success" type="submit">Отправить</button>
+            </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</main>
+{% endblock main %}
