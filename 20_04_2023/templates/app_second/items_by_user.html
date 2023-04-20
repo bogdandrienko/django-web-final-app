@@ -1,0 +1,40 @@
+{% extends 'app_second/components/base.html' %}
+{% load static %}
+{% load extras %}
+{% block title %} {{ title }} {% endblock title %}
+{% block main %}
+
+<main class="container mt-5">
+    <div>
+        <a href="{% url 'home' %}" class="btn btn-lg btn-outline-secondary">ко всем категориям</a>
+        <hr/>
+    </div>
+  <h1>Список товаров {{ username }}!</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+    {%  for item in items %}
+        <div class="col">
+          <div class="card h-100">
+            {% if item.image %}
+                <img src="{{ item.image.url }}" class="card-img-top" alt="Product Image">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }} <a href="{% url "items" item.seller.username %}" class="btn btn-sm btn-outline-dark">[{{ item.seller.username }}]</a></h5>
+              <p class="card-text">{{ item.description }}</p>
+              <p class="card-text">{{ item.price }} тг.</p>
+              <a href="{% url 'tovar_detail' item.id %}" class="btn btn-primary">Детально</a>
+            </div>
+          </div>
+        </div>
+    {% empty %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/400x300.png?text=Product+Image" class="card-img-top" alt="Product Image">
+            <div class="card-body">
+              <h5 class="card-title text-danger">Нет товаров в категории!</h5>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock main %}
